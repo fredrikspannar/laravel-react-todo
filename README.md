@@ -28,3 +28,10 @@ DELETE 		api/todo-item/[ID] 	Delete a item on a todo-list
 Note: If testing API with Postman - for PUT/PATCH make sure to send fields encoded as "x-www-form-urlencoded"
 
 For some routes an id-number is required and should be replaced in the URI instead of the placeholder [ID]
+
+## React frontend
+Local development - to compile React frontend with watch:
+
+```
+    npm run watch
+```
