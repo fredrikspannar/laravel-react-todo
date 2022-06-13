@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+// Mapp all frontend paths to the react-view which has React Router
+Route::get('/{path?}', function () {
     return view('welcome');
-});
+} )->where('path', '^((?!api).)*$'); // except 'api' word
