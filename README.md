@@ -15,7 +15,7 @@ Seed some example todo's with items
 Method 		URI			
 GET 		api/todo 		Get a list of all todo's
 POST 		api/todo 		Create a new todo-list ( Required fields: title )
-PUT|PATCH 		api/todo 		Update a todo-list ( Required fields: title, id )
+PUT|PATCH 	api/todo 		Update a todo-list ( Required fields: title, id )
 DELETE 		api/todo 		Delete a todo-list ( Required fields: id )
 GET 		api/todo/[ID] 		Show a todo with items on list with ID in [ID]
 ```
