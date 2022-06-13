@@ -77,14 +77,15 @@ class TodoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $todo = Todo::where('id', $id)->first();
-        
-        // if NOT found, return empty response with statuscode 404 ( not found )
-        if (empty($todo)) return response()->json(null, 404);
-
         $title = (!empty($request->title) && strlen($request->title) <= 255 ? $request->title : false);
 
-        if ( $title ) {
+        if ( $title && !empty($id) ) {
+
+            $todo = Todo::where('id', $id)->first();
+            
+            // if NOT found, return empty response with statuscode 404 ( not found )
+            if (empty($todo)) return response()->json(null, 404);
+            
             // update title now
             $todo->title = $title;
             $todo->save();
