@@ -21,8 +21,8 @@ DELETE 		api/todo/[ID] 		Delete a todo-list
 GET 		api/todo/[ID] 		Show a single todo with items on list
 
 POST 		api/todo-item 		Create a new item on a todo-list ( Required fields: title, todo_id )
-PUT|PATCH 	api/todo-item/[ID] 		Update a item on a todo-list ( Required fields: title - Optional: completed )
-DELETE 		api/todo-item/[ID] 		Delete a item on a todo-list
+PUT|PATCH 	api/todo-item/[ID] 	Update a item on a todo-list ( Required fields: title - Optional: completed )
+DELETE 		api/todo-item/[ID] 	Delete a item on a todo-list
 ```
 
 Note: If testing API with Postman - for PUT/PATCH make sure to send fields encoded as "x-www-form-urlencoded"
