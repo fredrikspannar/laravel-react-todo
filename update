@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "Fetching new code and updateing project...\r\n";
+git pull origin master
+composer update
+php artisan migrate
+php artisan clear-compiled
+php artisan view:clear
+php artisan config:clear
+php artisan optimize
+composer dump-autoload -o
