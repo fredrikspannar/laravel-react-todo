@@ -1,6 +1,7 @@
 #!/bin/bash
 
-echo "Fetching new code and updateing project...\r\n";
+echo "Fetching new code and updateing project...";
+
 git pull origin master
 composer update
 php artisan migrate
@@ -9,3 +10,4 @@ php artisan view:clear
 php artisan config:clear
 php artisan optimize
 composer dump-autoload -o
+chmod a+x ./update
