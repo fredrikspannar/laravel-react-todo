@@ -38,11 +38,11 @@ function SingleTodoList({apiURL}) {
 					{singleTodo.title}
 				</li>
 				<li className="list-group-item list-group-item-dark list-group-item-buttons">
-					<button className="btn btn-sm btn-primary" onClick={() => setShowAddModal(!showAddModal)}>Add</button>
+					<button className="btn btn-sm btn-primary btn-add-todo-item" onClick={() => setShowAddModal(!showAddModal)}>Add</button>
 				</li>
 				{singleTodo.items.map(item=> <SingleTodoItem item={item} key={item.id} />)}
 				<li className="list-group-item list-group-item-dark list-group-item-buttons">
-					<button className="btn btn-sm btn-primary" onClick={() => setShowAddModal(!showAddModal)}>Add</button>
+					<button className="btn btn-sm btn-primary btn-add-todo-item" onClick={() => setShowAddModal(!showAddModal)}>Add</button>
 				</li>			
 			</ul>
 			<AddTodoItem show={showAddModal} />

@@ -15,5 +15,5 @@ use Illuminate\Support\Facades\Route;
 
 // Mapp all frontend paths to the react-view which has React Router
 Route::get('/{path?}', function () {
-    return view('welcome');
+    return view('react_frontend');
 } )->where('path', '^((?!api).)*$'); // except 'api' word

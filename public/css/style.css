@@ -1,3 +1,5 @@
 .navbar-bg-dark { background-color: #212529; }
 .nav-link.active { background-color: #2D5176; }
 li .item-completed { display: inline-block; float: right; color: #2D764A; font-weight: bold; font-size: 22pt;}
+li button.btn-add-todo-item { display: inline-block; float: right; }
+nav .nav-brand { text-decoration: none; color: #fff; font-size: 14pt; }

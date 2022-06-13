@@ -1,7 +1,14 @@
 
 function AddTodoItem({show}) {
 
-	console.log(`AddTodoItem with ${show}`)
+	const handleOnClose = (event) => {
+		// remove modal and backrop from DOM
+		const modal = document.getElementById('addTodoItemModal');
+		if (modal) modal.outerHTML = "";
+
+		const backdrop = document.getElementById('addTodoItemModalBackdrop');
+		if (backdrop) backdrop.outerHTML = "";		
+	}
 
 	if (!show) {
 		return (
@@ -12,13 +19,13 @@ function AddTodoItem({show}) {
 	} else {
 		return (
 			<>
-				<div className="modal-backdrop fade show"></div>
+				<div className="modal-backdrop fade show" id="addTodoItemModalBackdrop"></div>
 				<div className="modal fade show" role="dialog" id="addTodoItemModal" style={{display : 'block'}}>
 				  <div className="modal-dialog" role="document">
 				    <div className="modal-content">
 				      <div className="modal-header">
 				        <h5 className="modal-title">Modal title</h5>
-				        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+				        <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={(event) => handleOnClose(event)}>
 				          <span aria-hidden="true">&times;</span>
 				        </button>
 				      </div>
@@ -27,7 +34,7 @@ function AddTodoItem({show}) {
 				      </div>
 				      <div className="modal-footer">
 				        <button type="button" className="btn btn-primary">Save changes</button>
-				        <button type="button" className="btn btn-secondary">Close</button>
+				        <button type="button" className="btn btn-secondary" onClick={(event) => handleOnClose(event)}>Close</button>
 				      </div>
 				    </div>
 				  </div>
