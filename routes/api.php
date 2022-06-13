@@ -21,5 +21,5 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\TodoController;
 use App\Http\Controllers\Api\TodoItemController;
 
-Route::resource('todo', TodoController::class);
-Route::resource('todo-item', TodoItemController::class, ['only' => [ 'store', 'create', 'destroy', 'update' ]]);
+Route::resource('todo', TodoController::class, ['only' => [ 'index', 'store', 'destroy', 'update' ]]);
+Route::resource('todo-item', TodoItemController::class, ['only' => [ 'store', 'destroy', 'update' ]]);

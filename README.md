@@ -15,5 +15,5 @@ Seed some example todo's with items
 Method 		URI			
 GET 		api/todo 				Get a list of all todo's
 
-GET 		api/todo/[ID] 			Show a todo with items on list with ID in [ID]
+GET 		api/todo/[ID] 				Show a todo with items on list with ID in [ID]
 ```

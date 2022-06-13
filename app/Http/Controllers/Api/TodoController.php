@@ -50,7 +50,12 @@ class TodoController extends Controller
      */
     public function show($id)
     {
-        $todo = Todo::where('id', $id)->with('items')->firstOrFail();
+        $todo = Todo::where('id', $id)->with('items')->first();
+        
+        // if NOT found, return empty response with statuscode 404 ( not found )
+        if (empty($todo)) return response()->json(null, 404);
+
+        // return response with statuscode 200 ( ok )
         return response()->json($todo, 200);
     }
 
