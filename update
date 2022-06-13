@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Fetching new code and updateing project...";
+echo "Fetching new code and updating project...";
 
 git pull origin master
 composer update

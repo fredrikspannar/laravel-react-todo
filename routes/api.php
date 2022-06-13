@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+/*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
+
+use App\Http\Controllers\Api\TodoController;
+use App\Http\Controllers\Api\TodoItemController;
+
+Route::resource('todo', TodoController::class);
+Route::resource('todo-item', TodoItemController::class, ['only' => [ 'store', 'create', 'destroy', 'update' ]]);
