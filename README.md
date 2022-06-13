@@ -12,8 +12,8 @@ Seed some example todo's with items
 ## API routes
 
 ```
-Method		URI			
-GET			api/todo 			Get a list of all todo's
+Method 		URI			
+GET 		api/todo 				Get a list of all todo's
 
-GET			api/todo/[ID] 		Show a todo with items on list with ID in [ID]
+GET 		api/todo/[ID] 			Show a todo with items on list with ID in [ID]
 ```
