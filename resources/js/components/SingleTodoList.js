@@ -7,6 +7,7 @@ import DeleteTodoItem from './includes/DeleteTodoItem';
 import EditTodoItem from './includes/EditTodoItem';
 import { BsTrash, BsFillPencilFill } from "react-icons/bs";
 import DeleteTodoList from './includes/DeleteTodoList';
+import EditTodoList from './includes/EditTodoList';
 
 function SingleTodoList({apiURL}) {
 	const { id } = useParams();
@@ -175,6 +176,32 @@ function SingleTodoList({apiURL}) {
 		}
 	}
 
+	const handleEditTodoListSubmit = (formData) => {
+		// submit edit list to server
+
+		if (formData.title.length == 0) return; // do not submit empty
+
+		// trigger show loader
+		setShowEditListModal(false);
+		setSingleTodo(false); 
+
+		// update item on list
+		let postOptions = {
+			method: 'PUT',
+			cache: 'no-cache',
+		    headers: {
+		      'Content-Type': 'application/json'
+		    },			
+		    redirect: 'follow',
+		    body: JSON.stringify(formData)
+		}
+		
+		fetch(`${apiURL}/todo/${formData.id}`,postOptions)
+			.then(res => res.json())
+			.then(data => setSingleTodo(data))
+			.catch(message => setLoadingError(message));	
+	}
+
 	const handleDeleteTodoListSubmit = (listId) => {
 		// submit delete list to server
 		
@@ -244,6 +271,7 @@ function SingleTodoList({apiURL}) {
 			{showEditModal !== false && <EditTodoItem onSubmit={handleEditTodoItemSubmit} item={showEditModal} onClose={() => setShowEditModal(false)} />}
 
 			{showDeleteListModal !== false && <DeleteTodoList onSubmit={handleDeleteTodoListSubmit} item={showDeleteListModal} />}
+			{showEditListModal !== false && <EditTodoList onSubmit={handleEditTodoListSubmit} item={showEditListModal} onClose={() => setShowEditListModal(false)} />}
 		</>
 	);
 }

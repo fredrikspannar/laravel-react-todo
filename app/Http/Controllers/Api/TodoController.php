@@ -85,7 +85,7 @@ class TodoController extends Controller
 
         if ( $title && !empty($id) ) {
 
-            $todo = Todo::where('id', $id)->first();
+            $todo = Todo::where('id', $id)->with('items')->first();
             
             // if NOT found, return empty response with statuscode 404 ( not found )
             if (empty($todo)) return response()->json(null, 404);
@@ -95,7 +95,7 @@ class TodoController extends Controller
             $todo->save();
 
             // return statuscode 200 ( ok ) with the updated todo
-            return response()->json([ 'todo' => $todo ], 200);
+            return response()->json($todo, 200);
         } else {
             // validation failed
             if ( empty($request->title) ) {
