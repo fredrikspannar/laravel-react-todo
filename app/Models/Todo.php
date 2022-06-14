@@ -11,6 +11,18 @@ use App\Models\TodoItem;
 class Todo extends Model
 {
     use HasFactory;
+    
+    protected $appends = array('total_items', 'completed_items');
+
+    public function getTotalItemsAttribute()
+    {
+        return $this->items->count();
+    }
+
+    public function getCompletedItemsAttribute()
+    {
+        return $this->items->where('completed','1')->count();
+    }
 
     public function getCreatedAtAttribute($value) {
     	return Carbon::parse($value)->format('Y-m-d H:i:s');

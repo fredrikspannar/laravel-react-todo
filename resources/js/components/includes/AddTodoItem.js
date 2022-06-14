@@ -70,7 +70,7 @@ function AddTodoItem({show, onSubmit, todoId}) {
 				      </div>
 				      <div className="modal-footer d-flex justify-content-between">
 				        <button type="button" className="btn btn-primary" onClick={(event) => handleOnSubmit(event)}>Save</button>
-				        <button type="button" className="btn btn-secondary" onClick={(event) => handleOnClose(event)}>Close</button>
+				        <button type="button" className="btn btn-secondary" onClick={(event) => handleOnClose(event)}>Cancel</button>
 				      </div>
 				    </div>
 				  </div>
