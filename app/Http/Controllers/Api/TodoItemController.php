@@ -107,10 +107,19 @@ class TodoItemController extends Controller
         // if NOT found, return empty response with statuscode 404 ( not found )
         if (empty($item)) return response()->json(null, 404);
 
+        // for return data
+        $todo_id = $item->todo_id;
+
         // else remove it..
         $item->delete();
 
+        // get data to return the whole new todo with items to render in frontend
+        // ( also set updated_at for the while todo for some status )
+        $todo = Todo::where('id', $todo_id)->with('items')->first();
+        $todo->updated_at = date('Y-m-d H:i:s');
+        $todo->save();
+
         // return status code 200
-        return response()->json(null, 200);
+        return response()->json($todo, 200);
     }
 }

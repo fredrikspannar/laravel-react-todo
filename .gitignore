@@ -16,3 +16,4 @@ yarn-error.log
 /.editorconfig
 /.env.example
 /.env.local
+/public/js/js.js

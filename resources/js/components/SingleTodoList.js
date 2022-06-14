@@ -3,12 +3,14 @@ import { TailSpin } from 'react-loading-icons';
 import { useParams } from 'react-router-dom'
 import SingleTodoItem from './includes/SingleTodoItem';
 import AddTodoItem from './includes/AddTodoItem';
+import DeleteTodoItem from './includes/DeleteTodoItem';
 
 function SingleTodoList({apiURL}) {
 	const { id } = useParams();
 	const [ singleTodo, setSingleTodo ] = useState(false);
 	const [ loadingError, setLoadingError ] = useState(false);
 	const [ showAddModal, setShowAddModal ] = useState(false);
+	const [ showDeleteModal, setShowDeleteModal ] = useState(false);
 
 	async function toggleAddModal() {
 		await setShowAddModal(true);
@@ -24,13 +26,18 @@ function SingleTodoList({apiURL}) {
 	}
 
 	useEffect(()=>{
+		// get todo with all items on list
 		fetch(`${apiURL}/todo/${id}`)
 			.then(res => res.json())
 			.then(data => setSingleTodo(data))
 			.catch(message => setLoadingError(message));	
 	},[]);
 
-	async function handleNewTodoItem(formData) {
+	const handleNewTodoItem = (formData) => {
+		// trigger show loader
+		setShowAddModal(false);
+		setSingleTodo(false); 
+
 		// save new item on list
 		let postOptions = {
 			method: 'POST',
@@ -46,6 +53,46 @@ function SingleTodoList({apiURL}) {
 			.then(res => res.json())
 			.then(data => setSingleTodo(data))
 			.catch(message => setLoadingError(message));	
+	}
+
+	async function handleDeleteTodoItem(item) {
+
+		// set state and trigger delete modal
+		await setShowDeleteModal(item);
+
+		// not shown? ( may happen if previously closed )
+		const modal = document.getElementById('deleteTodoItemModal');
+		if (modal.style.display == 'none') {
+			modal.style.display = 'block';
+
+			const backdrop = document.getElementById('deleteTodoItemModalBackdrop');
+			backdrop.style.display = 'block';
+		}
+	}
+
+	const handleDeleteTodoItemSubmit = (itemId) => {
+		// submit delete item to server
+		
+		// trigger show loader
+		setShowAddModal(false);
+		setSingleTodo(false); 
+
+		// save new item on list
+		let postOptions = {
+			method: 'DELETE',
+			cache: 'no-cache',
+		    headers: {
+		      'Content-Type': 'application/json'
+		    },			
+		    redirect: 'follow'
+		}
+		
+		fetch(`${apiURL}/todo-item/${itemId}`, postOptions)
+			.then(res => res.json())
+			.then(data => setSingleTodo(data))
+			.then(setShowDeleteModal(false))			
+			.catch(message => setLoadingError(message));	
+
 	}
 
 	// any error?
@@ -74,14 +121,17 @@ function SingleTodoList({apiURL}) {
 					<button className="btn btn-sm btn-primary btn-add-todo-item" onClick={toggleAddModal}>Add</button>
 				</li>
 
-				{singleTodo.items.map(item=> <SingleTodoItem item={item} key={item.id} />)}
+				{singleTodo.items.map(item=> <SingleTodoItem item={item} key={item.id} onDelete={handleDeleteTodoItem} />)}
 
 				<li className="list-group-item list-group-item-buttons">
 					<button className="btn btn-sm btn-primary btn-add-todo-item" onClick={toggleAddModal}>Add</button>
-				</li>	
+				</li>
 
 			</ul>
+			
 			<AddTodoItem show={showAddModal} onSubmit={handleNewTodoItem} todoId={id} />
+			
+			{showDeleteModal !== false && <DeleteTodoItem onSubmit={handleDeleteTodoItemSubmit} item={showDeleteModal} />}
 		</>
 	);
 }

@@ -12,4 +12,6 @@ require('./components/SingleTodoList');
 require('./components/includes/TodoItem');
 require('./components/includes/SingleTodoItem');
 require('./components/includes/AddTodoItem');
+require('./components/includes/DeleteTodoItem');
+
 require('./components/includes/TextField');
