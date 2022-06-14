@@ -1,18 +1,24 @@
-import React,{useState, useEffect } from 'react';
+import React,{ useState, useEffect } from 'react';
 import { TailSpin } from 'react-loading-icons';
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import SingleTodoItem from './includes/SingleTodoItem';
 import AddTodoItem from './includes/AddTodoItem';
 import DeleteTodoItem from './includes/DeleteTodoItem';
 import EditTodoItem from './includes/EditTodoItem';
+import { BsTrash, BsFillPencilFill } from "react-icons/bs";
+import DeleteTodoList from './includes/DeleteTodoList';
 
 function SingleTodoList({apiURL}) {
 	const { id } = useParams();
+	const navigate = useNavigate();
+
 	const [ singleTodo, setSingleTodo ] = useState(false);
 	const [ loadingError, setLoadingError ] = useState(false);
 	const [ showAddModal, setShowAddModal ] = useState(false);
 	const [ showDeleteModal, setShowDeleteModal ] = useState(false);
 	const [ showEditModal, setShowEditModal ] = useState(false);
+	const [ showDeleteListModal, setShowDeleteListModal ] = useState(false);
+	const [ showEditListModal, setShowEditListModal ] = useState(false);
 
 	async function toggleAddModal() {
 		await setShowAddModal(true);
@@ -141,6 +147,65 @@ function SingleTodoList({apiURL}) {
 			.catch(message => setLoadingError(message));	
 	}
 
+	async function onDeleteList() {
+		// set state and trigger delete modal
+		await setShowDeleteListModal(singleTodo);
+
+		// not shown? ( may happen if previously closed )
+		const modal = document.getElementById('deleteTodoListModal');
+		if (modal.style.display == 'none') {
+			modal.style.display = 'block';
+
+			const backdrop = document.getElementById('deleteTodoListModalBackdrop');
+			backdrop.style.display = 'block';
+		}
+	}
+
+	async function onEditList() {
+		// set state and trigger singleTodo modal
+		await setShowEditListModal(singleTodo);
+
+		// not shown? ( may happen if previously closed )
+		const modal = document.getElementById('editTodoListModal');
+		if (modal.style.display == 'none') {
+			modal.style.display = 'block';
+
+			const backdrop = document.getElementById('editTodoListModalBackdrop');
+			backdrop.style.display = 'block';
+		}
+	}
+
+	const handleDeleteTodoListSubmit = (listId) => {
+		// submit delete list to server
+		
+		// trigger show loader
+		setShowDeleteListModal(false);
+		setSingleTodo(false); 
+
+		// save new item on list
+		let postOptions = {
+			method: 'DELETE',
+			cache: 'no-cache',
+		    headers: {
+		      'Content-Type': 'application/json'
+		    },			
+		    redirect: 'follow'
+		}
+		
+		fetch(`${apiURL}/todo/${listId}`, postOptions)
+			.then(setShowDeleteModal(false))			
+			.then(() =>{
+				// redirect user since this todo does not exist now
+				navigate('/');
+			})
+			.catch(message => setLoadingError(message));
+
+	}
+
+
+	// ---------------------------------------------
+	// --------------- render output ---------------
+
 	// any error?
 	if ( loadingError !== false) {
 		return (
@@ -160,10 +225,12 @@ function SingleTodoList({apiURL}) {
 			<ul className="list-group">
 
 				<li className="list-group-item list-group-item-primary list-group-header">
-					{singleTodo.title}
+					{singleTodo.title} 
+					<button type="button" className="btn btn-transparent" title="Delete list" onClick={onDeleteList}><BsTrash /></button>
+					<button type="button" className="btn btn-transparent" title="Edit list" onClick={onEditList}><BsFillPencilFill /></button>				
 				</li>
 
-				{singleTodo.items.map(item=> <SingleTodoItem item={item} key={item.id} onDelete={handleDeleteTodoItem} onEdit={handleEditTodoItem} />)}
+				{singleTodo.items && singleTodo.items.map(item=> <SingleTodoItem item={item} key={item.id} onDelete={handleDeleteTodoItem} onEdit={handleEditTodoItem} />)}
 
 				<li className="list-group-item list-group-item-buttons">
 					<button className="btn btn-sm btn-primary btn-add-todo-item" onClick={toggleAddModal}>Add item</button>
@@ -174,6 +241,8 @@ function SingleTodoList({apiURL}) {
 			<AddTodoItem show={showAddModal} onSubmit={handleNewTodoItem} todoId={id} />
 			{showDeleteModal !== false && <DeleteTodoItem onSubmit={handleDeleteTodoItemSubmit} item={showDeleteModal} />}
 			{showEditModal !== false && <EditTodoItem onSubmit={handleEditTodoItemSubmit} item={showEditModal} onClose={() => setShowEditModal(false)} />}
+
+			{showDeleteListModal !== false && <DeleteTodoList onSubmit={handleDeleteTodoListSubmit} item={showDeleteListModal} />}
 		</>
 	);
 }

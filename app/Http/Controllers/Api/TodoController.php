@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Todo;
+use App\Models\TodoItem;
 
 class TodoController extends Controller
 {
@@ -120,6 +121,9 @@ class TodoController extends Controller
 
         // else remove it..
         $todo->delete();
+
+        // also remove any item(s) on the list
+        TodoItem::where('todo_id',$id)->delete();
 
         // return status code 200
         return response()->json(null, 200);
