@@ -34,6 +34,9 @@ function SingleTodoList({apiURL}) {
 	},[]);
 
 	const handleNewTodoItem = (formData) => {
+
+		if (formData.title.length == 0) return; // do not submit empty
+
 		// trigger show loader
 		setShowAddModal(false);
 		setSingleTodo(false); 
@@ -113,18 +116,14 @@ function SingleTodoList({apiURL}) {
 		<>
 			<ul className="list-group">
 
-				<li className="list-group-item list-group-item-primary">
+				<li className="list-group-item list-group-item-primary list-group-header">
 					{singleTodo.title}
-				</li>
-
-				<li className="list-group-item list-group-item-buttons">
-					<button className="btn btn-sm btn-primary btn-add-todo-item" onClick={toggleAddModal}>Add</button>
 				</li>
 
 				{singleTodo.items.map(item=> <SingleTodoItem item={item} key={item.id} onDelete={handleDeleteTodoItem} />)}
 
 				<li className="list-group-item list-group-item-buttons">
-					<button className="btn btn-sm btn-primary btn-add-todo-item" onClick={toggleAddModal}>Add</button>
+					<button className="btn btn-sm btn-primary btn-add-todo-item" onClick={toggleAddModal}>Add item</button>
 				</li>
 
 			</ul>

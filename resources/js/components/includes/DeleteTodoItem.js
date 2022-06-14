@@ -33,7 +33,7 @@ function DeleteTodoItem({onSubmit, item}) {
 			      <div className="modal-body">
 
 			        	<p>Are you sure you want to delete this item on the list?</p>
-			        	<p><em>"{item.title}"</em></p>
+			        	<p>&nbsp; &nbsp; <em>"{item.title}"</em></p>
 
 			      </div>
 			      <div className="modal-footer d-flex justify-content-between">

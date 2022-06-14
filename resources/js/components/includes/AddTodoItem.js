@@ -28,6 +28,10 @@ function AddTodoItem({show, onSubmit, todoId}) {
 	const handleOnInputChange = (value) => {
 		// save to formdata
 		setFormData({...formData, title:value});
+
+		// enable save-button
+		const saveButton = document.getElementById('add-submit-button');
+		saveButton.className = 'btn btn-primary';
 	}
 
 	const handleOnSubmit = (event) => {
@@ -69,7 +73,7 @@ function AddTodoItem({show, onSubmit, todoId}) {
 				        
 				      </div>
 				      <div className="modal-footer d-flex justify-content-between">
-				        <button type="button" className="btn btn-primary" onClick={(event) => handleOnSubmit(event)}>Save</button>
+				        <button type="button" className="btn btn-primary disabled" id="add-submit-button" onClick={(event) => handleOnSubmit(event)}>Save</button>
 				        <button type="button" className="btn btn-secondary" onClick={(event) => handleOnClose(event)}>Cancel</button>
 				      </div>
 				    </div>

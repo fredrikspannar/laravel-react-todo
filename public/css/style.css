@@ -15,3 +15,13 @@ nav .nav-brand { text-decoration: none; color: #fff; font-size: 14pt; }
 .alert-inline { padding: 6px 8px; margin-top: 4px; }
 
 .list-group-item .btn { display: inline-block; float: right;  }
+
+.list-group-header { font-size: 16pt; font-weight: bold; }
+
+.btn.disabled,
+.btn:disabled,
+.btn[disabled]{
+  border: 2px solid #999999;
+  opacity: 0.2;
+	text-decoration: line-through;
+}
