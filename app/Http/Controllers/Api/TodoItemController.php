@@ -75,6 +75,7 @@ class TodoItemController extends Controller
 
             $item->completed = $completed;
             $item->title = $title;
+            $item->updated_at = date('Y-m-d H:i:s');
             $item->save();
 
 
