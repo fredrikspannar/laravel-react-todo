@@ -37,8 +37,11 @@ class TodoController extends Controller
             $todo->title = $title;
             $todo->save();
 
+            // get new list to return
+            $todos = Todo::all();
+
             // return statuscode 201 ( created ) with the created todo
-            return response()->json([ 'todo' => $todo ], 201);
+            return response()->json($todos, 201);
         } else {
             // validation failed
             if ( empty($request->title) ) {

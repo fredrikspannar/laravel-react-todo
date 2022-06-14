@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import NavBar from './includes/NavBar';
-import HomePage from './HomePage';
+import TodoList from './TodoList';
 import SingleTodoList from './SingleTodoList';
 
 const apiURL = '/api';
@@ -17,7 +17,7 @@ function RootApp() {
                     <div className="col-md-8">
                         
                         <Routes>
-                            <Route path="/" element={<HomePage apiURL={apiURL} />} exact />
+                            <Route path="/" element={<TodoList apiURL={apiURL} />} exact />
                             <Route path="/show/:id" element={<SingleTodoList apiURL={apiURL} />}  />
                         </Routes>
                     

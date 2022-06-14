@@ -230,7 +230,8 @@ function SingleTodoList({apiURL}) {
 					<button type="button" className="btn btn-transparent" title="Edit list" onClick={onEditList}><BsFillPencilFill /></button>				
 				</li>
 
-				{singleTodo.items && singleTodo.items.map(item=> <SingleTodoItem item={item} key={item.id} onDelete={handleDeleteTodoItem} onEdit={handleEditTodoItem} />)}
+				{(singleTodo.items && singleTodo.items.length > 0) && singleTodo.items.map(item=> <SingleTodoItem item={item} key={item.id} onDelete={handleDeleteTodoItem} onEdit={handleEditTodoItem} />)}
+				{(!singleTodo.items || singleTodo.items.length == 0) && <li className="list-group-item">No items</li>}
 
 				<li className="list-group-item list-group-item-buttons">
 					<button className="btn btn-sm btn-primary btn-add-todo-item" onClick={toggleAddModal}>Add item</button>
