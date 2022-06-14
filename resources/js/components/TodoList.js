@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TailSpin } from 'react-loading-icons';
-import TodoItem from './TodoItem';
+import TodoItem from './includes/TodoItem';
 
 function TodoList({apiURL}) {
 	const [ listData, setListData ] = useState(false);

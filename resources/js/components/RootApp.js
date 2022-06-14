@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import NavBar from './NavBar';
+import NavBar from './includes/NavBar';
 import HomePage from './HomePage';
 import SingleTodoList from './SingleTodoList';
 
@@ -13,7 +13,7 @@ function RootApp() {
             <NavBar />
 
             <div className="container mt-5">
-                <div className="row justify-content-center">
+                <div className="row">
                     <div className="col-md-8">
                         
                         <Routes>

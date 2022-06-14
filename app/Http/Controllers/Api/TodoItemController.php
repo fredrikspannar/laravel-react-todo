@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\TodoItem;
+use App\Models\Todo;
 
 class TodoItemController extends Controller
 {
@@ -28,8 +29,14 @@ class TodoItemController extends Controller
             $item->title = $title;
             $item->save();
 
+            // get data to return the whole new todo with items to render in frontend
+            // ( also set updated_at for the while todo for some status )
+            $todo = Todo::where('id', $todo_id)->with('items')->first();
+            $todo->updated_at = date('Y-m-d H:i:s');
+            $todo->save();
+
             // return statuscode 201 ( created ) with the created todoitem
-            return response()->json([ 'item' => $item ], 201);
+            return response()->json($todo, 201);
 
         } else {
             // validation failed

@@ -3,10 +3,13 @@ require('./bootstrap');
 
 // get components
 require('./components/RootApp');
-require('./components/NavBar');
+require('./components/includes/NavBar');
 require('./components/HomePage');
+
 require('./components/TodoList');
-require('./components/TodoItem');
 require('./components/SingleTodoList');
-require('./components/SingleTodoItem');
-require('./components/AddTodoItem');
+
+require('./components/includes/TodoItem');
+require('./components/includes/SingleTodoItem');
+require('./components/includes/AddTodoItem');
+require('./components/includes/TextField');

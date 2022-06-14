@@ -2,6 +2,18 @@
 
 A Laravel API with an React frontend whith persistant storage in MySQL.
 
+React frontend sources in: /resources/js
+Backed API sources in: /app/Http/Controllers/Api
+
+## Install
+
+```
+    composer install
+    npm install
+```
+
+Setup an .env-file with database-config etc: [Laravel Docs - Configuration](https://laravel.com/docs/9.x/configuration)
+
 ## Database seeding
 Seed some example todo's with items
 

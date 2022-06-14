@@ -1,5 +1,15 @@
 .navbar-bg-dark { background-color: #212529; }
-.nav-link.active { background-color: #2D5176; }
+
 li .item-completed { display: inline-block; float: right; color: #2D764A; font-weight: bold; font-size: 22pt;}
 li button.btn-add-todo-item { display: inline-block; float: right; }
 nav .nav-brand { text-decoration: none; color: #fff; font-size: 14pt; }
+
+.modal .modal-header { padding: 0px 16px;}
+.modal .modal-header .btn-closemodal { position: relative; top: -12px; right: -22px; }
+.modal .modal-dialog { 
+	box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.2);
+	-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.2);
+}
+
+.alert-inline { padding: 6px 8px; margin-top: 4px; }
