@@ -3,7 +3,8 @@
 A Laravel API with an React frontend whith persistant storage in MySQL.
 
 React frontend sources in: /resources/js
-Backed API sources in: /app/Http/Controllers/Api
+
+Backend API sources in: /app/Http/Controllers/Api
 
 ## Install
 
@@ -46,4 +47,10 @@ Local development - to compile React frontend with watch:
 
 ```
     npm run watch
+```
+
+Production:
+
+```
+    npm run production
 ```
