@@ -1,6 +1,12 @@
+import {useState} from 'react';
 
-function TextField({id, title, onChangeValue, required='false'}) {
+function TextField({id, title, onChangeValue, required='false', startValue=''}) {
 	const alertId = `alert-${id}`;
+	const [ value, setValue ] = useState(startValue);
+
+	const handleChange = (event) => {
+		setValue(event.target.value);
+	}
 
 	const handleValidate = (event) => {
 		event.stopPropagation();
@@ -30,7 +36,7 @@ function TextField({id, title, onChangeValue, required='false'}) {
 	return (
 		<p>
 			<label htmlFor={id}>{title} {required === 'true' && '*'}</label>
-			<input type="text" id={id} className="form-control" onBlur={(event) => handleValidate(event)} />
+			<input type="text" id={id} className="form-control" value={value} onChange={(event) => handleChange(event)} onBlur={(event) => handleValidate(event)} />
 			<span id={alertId} className="alert alert-danger alert-inline" style={{display:'none'}}>This field is required</span>
 		</p>
 	);

@@ -77,8 +77,15 @@ class TodoItemController extends Controller
             $item->title = $title;
             $item->save();
 
+
+            // get data to return the whole new todo with items to render in frontend
+            // ( also set updated_at for the while todo for some status )
+            $todo = Todo::where('id', $item->todo_id)->with('items')->first();
+            $todo->updated_at = date('Y-m-d H:i:s');
+            $todo->save();
+
             // return statuscode 200 ( ok ) with the updated todoitem
-            return response()->json([ 'item' => $item ], 200);
+            return response()->json($todo, 200);
 
         } else {
             // validation failed
