@@ -17,3 +17,4 @@ yarn-error.log
 /.env.example
 /.env.local
 /public/js/js.js
+/public/js/app.js.LICENSE.txt
